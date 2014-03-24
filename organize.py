@@ -4,22 +4,20 @@ import os
 import sys
 import shutil
 
-import mutagenx as mg
+import metadata as md
 
 def process(path):
 
     for root, subdirs, subfiles in os.walk(path):
 
-        print("{}".format(root))
-
         for f in subfiles:
 
             f_path = os.path.join(root, f)
-            af_meta = mg.File(f_path)
-            if not af_meta:
+            try:
+                f_meta = md.Metadata(f_path)
+            except md.MetadataTypeNotSupported:
                 continue
-
-            print("{}:\n{}".format(f_path, af_meta.pprint()))
+            print("{}: {}".format(f_path, f_meta.filetype()))
 
 
 def _main(argv=None):
