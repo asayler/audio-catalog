@@ -1,0 +1,7 @@
+# Editor Cruft
+*~
+\#*
+.\#*
+
+# Python Cruft
+__pycache__
